@@ -3,7 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yohanna Seminóvski Pérez — Scientist × ML Engineer</title>
+  <script>
+    // Apply saved theme/lang before paint to avoid flash of wrong theme
+    (function() {
+      var theme = localStorage.getItem('theme');
+      if (!theme) theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      var lang = localStorage.getItem('lang') || 'en';
+      document.documentElement.setAttribute('lang', lang);
+    })();
+  </script>
+  <title data-en="Yohanna Seminóvski Pérez — Scientist × ML Engineer" data-es="Yohanna Seminóvski Pérez — Científica × Ingeniera ML">Yohanna Seminóvski Pérez — Scientist × ML Engineer</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -23,16 +33,42 @@
       --max: 960px;
       --pad: clamp(1.5rem, 5vw, 3rem);
     }
+    html[data-theme="dark"] {
+      --bg: #16150f;
+      --surface: #201f19;
+      --ink: #f0eee6;
+      --ink-2: #b6b2a8;
+      --ink-3: #78746a;
+      --warm: #e07a42;
+      --line: rgba(240,238,230,0.12);
+    }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; transition: background .3s ease, color .3s ease; }
+
+    /* dark-mode fixups for hardcoded SVG hex colors */
+    html[data-theme="dark"] svg [fill="#1a1916"] { fill: #f0eee6; }
+    html[data-theme="dark"] svg [stroke="#1a1916"] { stroke: #f0eee6; }
+    html[data-theme="dark"] svg [fill="#f5f3ef"] { fill: #16150f; }
+    html[data-theme="dark"] svg [stroke="#f5f3ef"] { stroke: #16150f; }
+    html[data-theme="dark"] svg [fill="#9a9790"] { fill: #78746a; }
+    html[data-theme="dark"] svg [stroke="#9a9790"] { stroke: #78746a; }
+    html[data-theme="dark"] svg [fill="#c8602a"] { fill: #e07a42; }
+    html[data-theme="dark"] svg [stroke="#c8602a"] { stroke: #e07a42; }
 
     /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,243,239,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--pad); height: 56px; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,243,239,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--pad); height: 56px; transition: background .3s ease; }
+    html[data-theme="dark"] nav { background: rgba(22,21,15,0.88); }
     .nav-brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
     .nav-brand-text { font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; color: var(--ink-2); }
+    .nav-right { display: flex; align-items: center; gap: 1.6rem; }
     .nav-links { display: flex; gap: 1.8rem; list-style: none; }
     .nav-links a { font-size: .8rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); text-decoration: none; transition: color .2s; }
     .nav-links a:hover { color: var(--warm); }
+    .nav-toggles { display: flex; align-items: center; gap: .5rem; }
+    .toggle-btn { display: inline-flex; align-items: center; justify-content: center; gap: .3rem; background: transparent; border: 1px solid var(--line); color: var(--ink-2); font-family: var(--mono); font-size: .7rem; letter-spacing: .04em; cursor: pointer; border-radius: 2px; padding: .38rem .55rem; transition: all .2s; line-height: 1; }
+    .toggle-btn:hover { border-color: var(--warm); color: var(--warm); }
+    .toggle-btn svg { width: 15px; height: 15px; display: block; }
+    #langToggle { min-width: 40px; }
 
     /* LAYOUT */
     .divider { border: none; border-top: 1px solid var(--line); }
@@ -196,15 +232,29 @@
     </svg>
     <span class="nav-brand-text">yohanna.seminovski</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="#pitch">Pitch</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#publications">Publications</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#pitch" data-en="Pitch" data-es="Presentación">Pitch</a></li>
+      <li><a href="#about" data-en="About" data-es="Sobre mí">About</a></li>
+      <li><a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a></li>
+      <li><a href="#skills" data-en="Skills" data-es="Habilidades">Skills</a></li>
+      <li><a href="#projects" data-en="Projects" data-es="Proyectos">Projects</a></li>
+      <li><a href="#publications" data-en="Publications" data-es="Publicaciones">Publications</a></li>
+      <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+    </ul>
+    <div class="nav-toggles">
+      <button id="langToggle" class="toggle-btn" type="button" aria-label="Switch language">ES</button>
+      <button id="themeToggle" class="toggle-btn" type="button" aria-label="Toggle dark mode">
+        <svg id="themeIconMoon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 10.8A7 7 0 019.2 3 7 7 0 1017 10.8z"/>
+        </svg>
+        <svg id="themeIconSun" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none;">
+          <circle cx="10" cy="10" r="3.6"/>
+          <path d="M10 1.8v2M10 16.2v2M3.2 10h-2M18.8 10h-2M5.2 5.2L3.8 3.8M16.2 16.2l-1.4-1.4M14.8 5.2l1.4-1.4M3.8 16.2l1.4-1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -230,15 +280,15 @@
       </g>
     </svg>
 
-    <p class="hero-eye">PhD · Computational Materials Science → ML Engineering</p>
+    <p class="hero-eye" data-en="PhD · Computational Materials Science → ML Engineering" data-es="Doctora · Ciencia de Materiales Computacional → Ingeniería ML">PhD · Computational Materials Science → ML Engineering</p>
     <h1 class="hero-name">Yohanna<br><em>Seminóvski</em></h1>
-    <p class="hero-tag">Theoretical chemist turned machine learning engineer. I bridge first-principles simulation and data-driven modeling — from DFT band structures to neural network potentials.</p>
+    <p class="hero-tag" data-en="Theoretical chemist turned machine learning engineer. I bridge first-principles simulation and data-driven modeling — from DFT band structures to neural network potentials." data-es="Química teórica reconvertida en ingeniera de machine learning. Conecto la simulación de primeros principios con el modelado basado en datos — desde estructuras de bandas DFT hasta potenciales de redes neuronales.">Theoretical chemist turned machine learning engineer. I bridge first-principles simulation and data-driven modeling — from DFT band structures to neural network potentials.</p>
     <div class="hero-cta">
-      <a href="#projects" class="btn btn-p">View Projects ↓</a>
-      <a href="#contact" class="btn btn-g">Get in Touch</a>
-      <a href="https://raw.githubusercontent.com/yohperez/page/main/cv_es.pdf" class="btn btn-g" download>Download CV ↓</a>
+      <a href="#projects" class="btn btn-p" data-en="View Projects ↓" data-es="Ver Proyectos ↓">View Projects ↓</a>
+      <a href="#contact" class="btn btn-g" data-en="Get in Touch" data-es="Contactar">Get in Touch</a>
+      <a href="https://raw.githubusercontent.com/yohperez/page/main/cv_es.pdf" class="btn btn-g" download data-en="Download CV ↓" data-es="Descargar CV ↓">Download CV ↓</a>
     </div>
-    <div class="hero-scroll"><span class="scroll-line"></span>Scroll to explore</div>
+    <div class="hero-scroll"><span class="scroll-line"></span><span data-en="Scroll to explore" data-es="Desplázate para explorar">Scroll to explore</span></div>
   </div>
 </section>
 
@@ -246,11 +296,11 @@
 
 <!-- ELEVATOR PITCH -->
 <section id="pitch">
-  <span class="label reveal">01 — Elevator Pitch</span>
+  <span class="label reveal" data-en="01 — Elevator Pitch" data-es="01 — Presentación Breve">01 — Elevator Pitch</span>
   <div class="pitch-grid">
     <div class="pitch-copy reveal">
-      <h2 class="pitch-h">30 seconds, <em>one</em> trajectory.</h2>
-      <p class="pitch-sub">A quick self-introduction: 15 years bridging quantum simulation and photovoltaic research, now channelled into machine learning and AI engineering.</p>
+      <h2 class="pitch-h" data-en-html="30 seconds, <em>one</em> trajectory." data-es-html="30 segundos, <em>una</em> trayectoria.">30 seconds, <em>one</em> trajectory.</h2>
+      <p class="pitch-sub" data-en="A quick self-introduction: 15 years bridging quantum simulation and photovoltaic research, now channelled into machine learning and AI engineering." data-es="Una autopresentación breve: 15 años conectando la simulación cuántica y la investigación fotovoltaica, ahora encauzados hacia el machine learning y la ingeniería de IA.">A quick self-introduction: 15 years bridging quantum simulation and photovoltaic research, now channelled into machine learning and AI engineering.</p>
     </div>
     <div class="pitch-video-wrap reveal">
       <video class="pitch-video" controls preload="metadata" poster="videos/elevator-pitch-poster.jpg" playsinline>
@@ -265,13 +315,13 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <span class="label reveal">02 — About</span>
+  <span class="label reveal" data-en="02 — About" data-es="02 — Sobre mí">02 — About</span>
   <div class="about-grid">
     <div class="about-bio reveal">
-      <p>I hold a <strong>PhD in Computational Chemistry (UPM, 2014)</strong> with over 15 years of international research experience in quantum simulation, heterogeneous catalysis, and photovoltaic solar energy. Author of <strong>17 scientific publications</strong> in RSC, ACS, AIP, and Elsevier journals, and co-inventor of a registered patent at UPM.</p>
-      <p>Currently in active transition towards <strong>Data Science and AI Engineering</strong>, combining a solid scientific foundation with Python, PyTorch, scikit-learn, and Graph Neural Networks. Enrolled in an intensive <strong>AI &amp; ML Bootcamp (~1,250 h)</strong> at SomosF5/AI4Inclusion, working on portfolio projects in materials science and energy.</p>
-      <p>Certified <strong>Scrum Master &amp; Product Owner</strong> with 15 years facilitating multidisciplinary teams across Spain, Brazil, and the UK.</p>
-      <p>Based in <strong>Madrid, Spain</strong>. Multilingual: Spanish (native), English (C1), Portuguese (advanced), French (intermediate).</p>
+      <p data-en-html="I hold a &lt;strong&gt;PhD in Computational Chemistry (UPM, 2014)&lt;/strong&gt; with over 15 years of international research experience in quantum simulation, heterogeneous catalysis, and photovoltaic solar energy. Author of &lt;strong&gt;17 scientific publications&lt;/strong&gt; in RSC, ACS, AIP, and Elsevier journals, and co-inventor of a registered patent at UPM." data-es-html="Soy &lt;strong&gt;Doctora en Química Computacional (UPM, 2014)&lt;/strong&gt; con más de 15 años de experiencia internacional en simulación cuántica, catálisis heterogénea y energía solar fotovoltaica. Autora de &lt;strong&gt;17 publicaciones científicas&lt;/strong&gt; en revistas RSC, ACS, AIP y Elsevier, y coinventora de una patente registrada en la UPM.">I hold a <strong>PhD in Computational Chemistry (UPM, 2014)</strong> with over 15 years of international research experience in quantum simulation, heterogeneous catalysis, and photovoltaic solar energy. Author of <strong>17 scientific publications</strong> in RSC, ACS, AIP, and Elsevier journals, and co-inventor of a registered patent at UPM.</p>
+      <p data-en-html="Currently in active transition towards &lt;strong&gt;Data Science and AI Engineering&lt;/strong&gt;, combining a solid scientific foundation with Python, PyTorch, scikit-learn, and Graph Neural Networks. Enrolled in an intensive &lt;strong&gt;AI &amp; ML Bootcamp (~1,250 h)&lt;/strong&gt; at SomosF5/AI4Inclusion, working on portfolio projects in materials science and energy." data-es-html="Actualmente en transición activa hacia &lt;strong&gt;Data Science e Ingeniería de IA&lt;/strong&gt;, combinando una sólida base científica con Python, PyTorch, scikit-learn y Redes Neuronales de Grafos. Cursando un &lt;strong&gt;Bootcamp intensivo de IA y ML (~1.250 h)&lt;/strong&gt; en SomosF5/AI4Inclusion, con proyectos de portafolio en ciencia de materiales y energía.">Currently in active transition towards <strong>Data Science and AI Engineering</strong>, combining a solid scientific foundation with Python, PyTorch, scikit-learn, and Graph Neural Networks. Enrolled in an intensive <strong>AI &amp; ML Bootcamp (~1,250 h)</strong> at SomosF5/AI4Inclusion, working on portfolio projects in materials science and energy.</p>
+      <p data-en-html="Certified &lt;strong&gt;Scrum Master &amp; Product Owner&lt;/strong&gt; with 15 years facilitating multidisciplinary teams across Spain, Brazil, and the UK." data-es-html="Certificada como &lt;strong&gt;Scrum Master y Product Owner&lt;/strong&gt;, con 15 años facilitando equipos multidisciplinares en España, Brasil y el Reino Unido.">Certified <strong>Scrum Master &amp; Product Owner</strong> with 15 years facilitating multidisciplinary teams across Spain, Brazil, and the UK.</p>
+      <p data-en-html="Based in &lt;strong&gt;Madrid, Spain&lt;/strong&gt;. Multilingual: Spanish (native), English (C1), Portuguese (advanced), French (intermediate)." data-es-html="Radicada en &lt;strong&gt;Madrid, España&lt;/strong&gt;. Multilingüe: español (nativo), inglés (C1), portugués (avanzado), francés (intermedio).">Based in <strong>Madrid, Spain</strong>. Multilingual: Spanish (native), English (C1), Portuguese (advanced), French (intermediate).</p>
     </div>
     <div class="about-right reveal">
       <!-- BCC Crystal Lattice SVG — same as index1.html -->
@@ -312,12 +362,12 @@
         <text x="130" y="182" font-family="monospace" font-size="8.5" fill="#9a9790" text-anchor="middle" letter-spacing="2">BCC CRYSTAL LATTICE</text>
       </svg>
       <div class="stats">
-        <div class="stat"><div class="stat-n">17</div><div class="stat-l">Scientific publications</div></div>
-        <div class="stat"><div class="stat-n">1</div><div class="stat-l">Patent · UPM P200930680</div></div>
-        <div class="stat"><div class="stat-n">~1250h</div><div class="stat-l">ML/AI Bootcamp in progress</div></div>
-        <div class="stat"><div class="stat-n">4+</div><div class="stat-l">Languages spoken</div></div>
-        <div class="stat"><div class="stat-n">15+</div><div class="stat-l">Years research experience</div></div>
-        <div class="stat"><div class="stat-n">3</div><div class="stat-l">Countries · ES · BR · UK</div></div>
+        <div class="stat"><div class="stat-n">17</div><div class="stat-l" data-en="Scientific publications" data-es="Publicaciones científicas">Scientific publications</div></div>
+        <div class="stat"><div class="stat-n">1</div><div class="stat-l" data-en="Patent · UPM P200930680" data-es="Patente · UPM P200930680">Patent · UPM P200930680</div></div>
+        <div class="stat"><div class="stat-n">~1250h</div><div class="stat-l" data-en="ML/AI Bootcamp in progress" data-es="Bootcamp ML/IA en curso">ML/AI Bootcamp in progress</div></div>
+        <div class="stat"><div class="stat-n">4+</div><div class="stat-l" data-en="Languages spoken" data-es="Idiomas hablados">Languages spoken</div></div>
+        <div class="stat"><div class="stat-n">15+</div><div class="stat-l" data-en="Years research experience" data-es="Años de experiencia investigadora">Years research experience</div></div>
+        <div class="stat"><div class="stat-n">3</div><div class="stat-l" data-en="Countries · ES · BR · UK" data-es="Países · ES · BR · UK">Countries · ES · BR · UK</div></div>
       </div>
     </div>
   </div>
@@ -328,32 +378,32 @@
 <!-- EXPERIENCE -->
 <div id="experience">
   <div class="inner">
-    <span class="label reveal">03 — Professional Experience</span>
+    <span class="label reveal" data-en="03 — Professional Experience" data-es="03 — Experiencia Profesional">03 — Professional Experience</span>
     <div class="exp-cols">
       <div class="exp-timeline">
         <div class="exp-item reveal">
           <div class="exp-meta">2026 – Present</div>
           <h3>Asesora · Konecta / AEAT</h3>
           <div class="exp-org">Madrid, Spain</div>
-          <p class="exp-desc">Technical support for the Renta 2025 campaign; complex tax consultations under pressure. Technical communication to the public in real time in an agile, high-demand environment.</p>
+          <p class="exp-desc" data-en="Technical support for the Renta 2025 campaign; complex tax consultations under pressure. Technical communication to the public in real time in an agile, high-demand environment." data-es="Soporte técnico para la campaña de la Renta 2025; consultas fiscales complejas bajo presión. Comunicación técnica al público en tiempo real en un entorno ágil y de alta demanda.">Technical support for the Renta 2025 campaign; complex tax consultations under pressure. Technical communication to the public in real time in an agile, high-demand environment.</p>
         </div>
         <div class="exp-item reveal">
           <div class="exp-meta">2026 – Present</div>
           <h3>AI Bootcamp · SomosF5 / AI4Inclusion</h3>
           <div class="exp-org">Madrid, Spain</div>
-          <p class="exp-desc">Intensive training in Python, PyTorch, TensorFlow, and Graph Neural Networks. Portfolio projects in materials science and energy; technical team advisor.</p>
+          <p class="exp-desc" data-en="Intensive training in Python, PyTorch, TensorFlow, and Graph Neural Networks. Portfolio projects in materials science and energy; technical team advisor." data-es="Formación intensiva en Python, PyTorch, TensorFlow y Redes Neuronales de Grafos. Proyectos de portafolio en ciencia de materiales y energía; asesora técnica de equipo.">Intensive training in Python, PyTorch, TensorFlow, and Graph Neural Networks. Portfolio projects in materials science and energy; technical team advisor.</p>
         </div>
         <div class="exp-item reveal">
           <div class="exp-meta">2019 – 2020</div>
           <h3>Técnico Grado Doctor · ITQ – UPV</h3>
           <div class="exp-org">Valencia, Spain</div>
-          <p class="exp-desc">VASP and LAMMPS simulations for zeolite systems; separation of 6-ketose/saccharose mixtures. Results published in Elsevier 2021.</p>
+          <p class="exp-desc" data-en="VASP and LAMMPS simulations for zeolite systems; separation of 6-ketose/saccharose mixtures. Results published in Elsevier 2021." data-es="Simulaciones VASP y LAMMPS para sistemas de zeolitas; separación de mezclas de 6-cetosa/sacarosa. Resultados publicados en Elsevier 2021.">VASP and LAMMPS simulations for zeolite systems; separation of 6-ketose/saccharose mixtures. Results published in Elsevier 2021.</p>
         </div>
         <div class="exp-item reveal">
           <div class="exp-meta">2011 – 2012</div>
           <h3>Investigadora Visitante · UCL</h3>
           <div class="exp-org">London, UK</div>
-          <p class="exp-desc">Worked entirely in English in a high-level international team. High-impact publications in JPL journal.</p>
+          <p class="exp-desc" data-en="Worked entirely in English in a high-level international team. High-impact publications in JPL journal." data-es="Trabajo íntegramente en inglés en un equipo internacional de alto nivel. Publicaciones de alto impacto en la revista JPL.">Worked entirely in English in a high-level international team. High-impact publications in JPL journal.</p>
         </div>
       </div>
       <div class="exp-timeline">
@@ -361,25 +411,25 @@
           <div class="exp-meta">2014 – 2017</div>
           <h3>Investigadora Postdoc · USP</h3>
           <div class="exp-org">São Paulo, Brazil</div>
-          <p class="exp-desc">Heterogeneous catalysis and molecular adsorption. 5 publications in Journal of Chemical Physics, Surface Science, and JPCC.</p>
+          <p class="exp-desc" data-en="Heterogeneous catalysis and molecular adsorption. 5 publications in Journal of Chemical Physics, Surface Science, and JPCC." data-es="Catálisis heterogénea y adsorción molecular. 5 publicaciones en Journal of Chemical Physics, Surface Science y JPCC.">Heterogeneous catalysis and molecular adsorption. 5 publications in Journal of Chemical Physics, Surface Science, and JPCC.</p>
         </div>
         <div class="exp-item reveal">
           <div class="exp-meta">2009 – 2014</div>
           <h3>Doctoranda · UPM</h3>
           <div class="exp-org">Madrid, Spain</div>
-          <p class="exp-desc">Thesis on B.I. materials for high-efficiency photovoltaic solar cells. 9 publications in Thin Solid Films, Applied Physics Letters, and Solar Energy Materials. Co-inventor patent P200930680. Python &amp; Bash scripts reduced computation time ~60%.</p>
+          <p class="exp-desc" data-en="Thesis on B.I. materials for high-efficiency photovoltaic solar cells. 9 publications in Thin Solid Films, Applied Physics Letters, and Solar Energy Materials. Co-inventor patent P200930680. Python &amp; Bash scripts reduced computation time ~60%." data-es="Tesis sobre materiales B.I. para células solares fotovoltaicas de alta eficiencia. 9 publicaciones en Thin Solid Films, Applied Physics Letters y Solar Energy Materials. Coinventora de la patente P200930680. Scripts en Python y Bash redujeron el tiempo de cómputo ~60%.">Thesis on B.I. materials for high-efficiency photovoltaic solar cells. 9 publications in Thin Solid Films, Applied Physics Letters, and Solar Energy Materials. Co-inventor patent P200930680. Python &amp; Bash scripts reduced computation time ~60%.</p>
         </div>
         <div class="exp-item reveal">
           <div class="exp-meta">2005 – 2008</div>
           <h3>Investigadora · CIP</h3>
           <div class="exp-org">La Habana, Cuba</div>
-          <p class="exp-desc">Synthesis and characterisation of activated carbons. Publication in Revista CENIC Ciencias Químicas (2008).</p>
+          <p class="exp-desc" data-en="Synthesis and characterisation of activated carbons. Publication in Revista CENIC Ciencias Químicas (2008)." data-es="Síntesis y caracterización de carbones activados. Publicación en Revista CENIC Ciencias Químicas (2008).">Synthesis and characterisation of activated carbons. Publication in Revista CENIC Ciencias Químicas (2008).</p>
         </div>
         <div class="exp-item reveal">
           <div class="exp-meta">2020 – Present</div>
           <h3>Voluntaria · hacesfalta.org</h3>
           <div class="exp-org">Madrid, Spain</div>
-          <p class="exp-desc">Active participation in web volunteering projects.</p>
+          <p class="exp-desc" data-en="Active participation in web volunteering projects." data-es="Participación activa en proyectos de voluntariado web.">Active participation in web volunteering projects.</p>
         </div>
       </div>
     </div>
@@ -392,7 +442,7 @@
 <div id="skills">
   <div class="inner">
     <div class="skills-head">
-      <span class="label reveal">04 — Skills &amp; Stack</span>
+      <span class="label reveal" data-en="04 — Skills &amp; Stack" data-es="04 — Habilidades y Stack">04 — Skills &amp; Stack</span>
       <svg class="skills-wave reveal" viewBox="0 0 160 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <polyline points="0,31 10,10 20,52 30,14 40,46 50,19 60,42 70,11 80,49 90,21 100,39 110,8 120,53 130,27 140,36 150,17 160,31"
           fill="none" stroke="#c8602a" stroke-width="2" stroke-linejoin="round" opacity=".75"/>
@@ -410,7 +460,7 @@
           <circle cx="17" cy="17" r="3.5" fill="#c8602a"/>
           <circle cx="29.5" cy="12.5" r="2" fill="#1a1916"/>
         </svg>
-        <div class="card-title">Computational Science</div>
+        <div class="card-title" data-en="Computational Science" data-es="Ciencia Computacional">Computational Science</div>
         <div class="tags">
           <span class="tag">DFT</span><span class="tag">VASP</span><span class="tag">LAMMPS</span>
           <span class="tag">Electronic Structure</span><span class="tag">Catalysis</span>
@@ -436,7 +486,7 @@
           <line x1="20" y1="17" x2="26" y2="17" stroke="#9a9790" stroke-width="1"/>
           <line x1="20" y1="29" x2="26" y2="17" stroke="#9a9790" stroke-width="1"/>
         </svg>
-        <div class="card-title">ML / AI</div>
+        <div class="card-title" data-en="ML / AI" data-es="ML / IA">ML / AI</div>
         <div class="tags">
           <span class="tag hot">PyTorch</span><span class="tag hot">GNNs</span>
           <span class="tag">scikit-learn</span><span class="tag">TensorFlow</span>
@@ -452,7 +502,7 @@
           <line x1="7"  y1="21" x2="12" y2="21" stroke="#c8602a" stroke-width="1.5" stroke-linecap="round"/>
           <circle cx="26" cy="13" r="2.5" fill="#c8602a"/>
         </svg>
-        <div class="card-title">Programming</div>
+        <div class="card-title" data-en="Programming" data-es="Programación">Programming</div>
         <div class="tags">
           <span class="tag hot">Python</span><span class="tag">SQL</span><span class="tag">Bash</span>
           <span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Jupyter</span>
@@ -467,7 +517,7 @@
           <rect x="27" y="16" width="5" height="14" fill="#1a1916" opacity=".4"/>
           <line x1="3" y1="31" x2="33" y2="31" stroke="#1a1916" stroke-width="1" opacity=".25"/>
         </svg>
-        <div class="card-title">Data &amp; Visualisation</div>
+        <div class="card-title" data-en="Data &amp; Visualisation" data-es="Datos y Visualización">Data &amp; Visualisation</div>
         <div class="tags">
           <span class="tag">Matplotlib</span><span class="tag">Seaborn</span><span class="tag">Plotly</span>
           <span class="tag">Streamlit</span><span class="tag">Power BI</span><span class="tag">Tableau</span>
@@ -483,7 +533,7 @@
           <line x1="4"  y1="17" x2="10" y2="17" stroke="#1a1916" stroke-width="2" stroke-linecap="round"/>
           <line x1="24" y1="17" x2="30" y2="17" stroke="#1a1916" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <div class="card-title">DevOps &amp; Tools</div>
+        <div class="card-title" data-en="DevOps &amp; Tools" data-es="DevOps y Herramientas">DevOps &amp; Tools</div>
         <div class="tags">
           <span class="tag">Git / GitHub</span><span class="tag">Google Colab</span><span class="tag">Docker</span>
           <span class="tag">VS Code</span><span class="tag">Apache Spark</span>
@@ -499,7 +549,7 @@
           <line x1="17" y1="15" x2="27" y2="22" stroke="#9a9790" stroke-width="1"/>
           <circle cx="17" cy="10" r="2.5" fill="#c8602a"/>
         </svg>
-        <div class="card-title">Agile &amp; Leadership</div>
+        <div class="card-title" data-en="Agile &amp; Leadership" data-es="Agile y Liderazgo">Agile &amp; Leadership</div>
         <div class="tags">
           <span class="tag hot">Scrum Master</span><span class="tag hot">Product Owner</span>
           <span class="tag">Agile</span><span class="tag">Kanban</span>
@@ -516,7 +566,7 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="proj-head">
-    <span class="label reveal">05 — Projects</span>
+    <span class="label reveal" data-en="05 — Projects" data-es="05 — Proyectos">05 — Projects</span>
     <svg class="proj-deco reveal" viewBox="0 0 115 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <line x1="18" y1="31" x2="45" y2="14" stroke="#9a9790" stroke-width="1"/>
       <line x1="18" y1="31" x2="45" y2="48" stroke="#9a9790" stroke-width="1"/>
@@ -543,7 +593,7 @@
       <div>
         <div class="proj-meta"><span class="badge">ML · Materials</span><span class="yr">2025</span></div>
         <h3 class="proj-title">Bandgap Predictor</h3>
-        <p class="proj-desc">ML pipeline for predicting semiconductor bandgaps using the Materials Project API and pymatgen feature engineering. First portfolio project in ML for Science.</p>
+        <p class="proj-desc" data-en="ML pipeline for predicting semiconductor bandgaps using the Materials Project API and pymatgen feature engineering. First portfolio project in ML for Science." data-es="Pipeline de ML para predecir bandgaps de semiconductores usando la API de Materials Project e ingeniería de características con pymatgen. Primer proyecto de portafolio en ML para Ciencia.">ML pipeline for predicting semiconductor bandgaps using the Materials Project API and pymatgen feature engineering. First portfolio project in ML for Science.</p>
       </div>
       <span class="proj-arr">↗</span>
     </a>
@@ -551,7 +601,7 @@
       <div>
         <div class="proj-meta"><span class="badge">Python · CLI</span><span class="yr">2024</span></div>
         <h3 class="proj-title">SciQuiz Pro</h3>
-        <p class="proj-desc">Scientific trivia CLI game built as CS50P final project, with 36 questions across 6 categories, streak multiplier scoring, and 30 pytest tests. Colab-compatible notebooks.</p>
+        <p class="proj-desc" data-en="Scientific trivia CLI game built as CS50P final project, with 36 questions across 6 categories, streak multiplier scoring, and 30 pytest tests. Colab-compatible notebooks." data-es="Juego de trivia científica en CLI, proyecto final de CS50P, con 36 preguntas en 6 categorías, puntuación con multiplicador de rachas y 30 tests con pytest. Notebooks compatibles con Colab.">Scientific trivia CLI game built as CS50P final project, with 36 questions across 6 categories, streak multiplier scoring, and 30 pytest tests. Colab-compatible notebooks.</p>
       </div>
       <span class="proj-arr">↗</span>
     </a>
@@ -559,7 +609,7 @@
       <div>
         <div class="proj-meta"><span class="badge">AI · Health</span><span class="yr">2025</span></div>
         <h3 class="proj-title">VitaBeat</h3>
-        <p class="proj-desc">AI system for elderly isolation prevention. Full suite: interactive HTML dashboard, Jupyter notebooks, ReportLab PDF, PowerPoint, sample data CSV, and README.</p>
+        <p class="proj-desc" data-en="AI system for elderly isolation prevention. Full suite: interactive HTML dashboard, Jupyter notebooks, ReportLab PDF, PowerPoint, sample data CSV, and README." data-es="Sistema de IA para la prevención del aislamiento en personas mayores. Suite completa: dashboard HTML interactivo, notebooks Jupyter, PDF con ReportLab, PowerPoint, CSV de datos de ejemplo y README.">AI system for elderly isolation prevention. Full suite: interactive HTML dashboard, Jupyter notebooks, ReportLab PDF, PowerPoint, sample data CSV, and README.</p>
       </div>
       <span class="proj-arr">↗</span>
     </a>
@@ -567,7 +617,7 @@
       <div>
         <div class="proj-meta"><span class="badge">Web · Data</span><span class="yr">2025</span></div>
         <h3 class="proj-title">MunicipioClima</h3>
-        <p class="proj-desc">Self-contained weather dashboard for Spanish municipalities using Open-Meteo APIs. Real-time visualisation with no external CDN dependencies.</p>
+        <p class="proj-desc" data-en="Self-contained weather dashboard for Spanish municipalities using Open-Meteo APIs. Real-time visualisation with no external CDN dependencies." data-es="Dashboard meteorológico autocontenido para municipios españoles usando las APIs de Open-Meteo. Visualización en tiempo real sin dependencias externas de CDN.">Self-contained weather dashboard for Spanish municipalities using Open-Meteo APIs. Real-time visualisation with no external CDN dependencies.</p>
       </div>
       <span class="proj-arr">↗</span>
     </a>
@@ -575,7 +625,7 @@
       <div>
         <div class="proj-meta"><span class="badge">Education · Python</span><span class="yr">2025</span></div>
         <h3 class="proj-title">Python Escape Room</h3>
-        <p class="proj-desc">Interactive diagnostic game for bootcamp students to assess Python fundamentals through gamified problem-solving challenges.</p>
+        <p class="proj-desc" data-en="Interactive diagnostic game for bootcamp students to assess Python fundamentals through gamified problem-solving challenges." data-es="Juego diagnóstico interactivo para que estudiantes del bootcamp evalúen sus fundamentos de Python mediante retos de resolución de problemas gamificados.">Interactive diagnostic game for bootcamp students to assess Python fundamentals through gamified problem-solving challenges.</p>
       </div>
       <span class="proj-arr">↗</span>
     </a>
@@ -583,7 +633,7 @@
       <div>
         <div class="proj-meta"><span class="badge">GNN · Research</span><span class="yr">2025 →</span></div>
         <h3 class="proj-title">Open Catalyst / GNN Potential</h3>
-        <p class="proj-desc">Graph Neural Network for atomistic systems targeting Open Catalyst OC20/OC22 datasets. Portfolio capstone aimed at Repsol, Orbital Materials, NREL.</p>
+        <p class="proj-desc" data-en="Graph Neural Network for atomistic systems targeting Open Catalyst OC20/OC22 datasets. Portfolio capstone aimed at Repsol, Orbital Materials, NREL." data-es="Red Neuronal de Grafos para sistemas atomísticos orientada a los datasets Open Catalyst OC20/OC22. Proyecto capstone de portafolio dirigido a Repsol, Orbital Materials, NREL.">Graph Neural Network for atomistic systems targeting Open Catalyst OC20/OC22 datasets. Portfolio capstone aimed at Repsol, Orbital Materials, NREL.</p>
       </div>
       <span class="proj-arr">↗</span>
     </a>
@@ -595,22 +645,22 @@
 <!-- PUBLICATIONS -->
 <div id="publications">
   <div class="inner">
-    <span class="label reveal">06 — Publications &amp; Patents</span>
+    <span class="label reveal" data-en="06 — Publications &amp; Patents" data-es="06 — Publicaciones y Patentes">06 — Publications &amp; Patents</span>
     <div class="pub-stats reveal">
       <div>
         <span class="pub-stat-num">17</span>
-        <span class="pub-stat-label">Articles</span>
+        <span class="pub-stat-label" data-en="Articles" data-es="Artículos">Articles</span>
       </div>
       <div>
         <span class="pub-stat-num">1</span>
-        <span class="pub-stat-label">Patent · UPM P200930680</span>
+        <span class="pub-stat-label" data-en="Patent · UPM P200930680" data-es="Patente · UPM P200930680">Patent · UPM P200930680</span>
       </div>
       <div>
         <span class="pub-stat-num">Q1</span>
-        <span class="pub-stat-label">Journal Tier</span>
+        <span class="pub-stat-label" data-en="Journal Tier" data-es="Nivel de Revista">Journal Tier</span>
       </div>
     </div>
-    <p class="reveal" style="font-size:.95rem;font-weight:300;color:var(--ink-2);max-width:580px;margin-bottom:1rem;">Publications across high-impact journals in physics, chemistry, and materials science:</p>
+    <p class="reveal" style="font-size:.95rem;font-weight:300;color:var(--ink-2);max-width:580px;margin-bottom:1rem;" data-en="Publications across high-impact journals in physics, chemistry, and materials science:" data-es="Publicaciones en revistas de alto impacto en física, química y ciencia de materiales:">Publications across high-impact journals in physics, chemistry, and materials science:</p>
     <div class="pub-journals reveal">
       <span class="journal-badge">RSC</span><span class="journal-badge">ACS</span>
       <span class="journal-badge">AIP</span><span class="journal-badge">Elsevier</span>
@@ -633,35 +683,35 @@
 
 <!-- EDUCATION -->
 <section id="education">
-  <span class="label reveal">07 — Education</span>
+  <span class="label reveal" data-en="07 — Education" data-es="07 — Educación">07 — Education</span>
   <div class="edu-grid">
     <div class="edu-card reveal">
-      <div class="edu-degree">Postdoc en Modelado de Catálisis Heterogénea</div>
+      <div class="edu-degree" data-en="Postdoctoral Fellow, Heterogeneous Catalysis Modelling" data-es="Postdoc en Modelado de Catálisis Heterogénea">Postdoc en Modelado de Catálisis Heterogénea</div>
       <div class="edu-inst">Universidad de São Paulo (USP)</div>
       <div class="edu-year">2014 – 2017</div>
     </div>
     <div class="edu-card reveal">
-      <div class="edu-degree">Doctora en Energía Solar Fotovoltaica</div>
+      <div class="edu-degree" data-en="PhD in Photovoltaic Solar Energy" data-es="Doctora en Energía Solar Fotovoltaica">Doctora en Energía Solar Fotovoltaica</div>
       <div class="edu-inst">Universidad Politécnica de Madrid (UPM)</div>
       <div class="edu-year">2009 – 2014</div>
     </div>
     <div class="edu-card reveal">
-      <div class="edu-degree">Máster en Ciencia y Tecnología de Materiales</div>
+      <div class="edu-degree" data-en="MSc in Materials Science &amp; Technology" data-es="Máster en Ciencia y Tecnología de Materiales">Máster en Ciencia y Tecnología de Materiales</div>
       <div class="edu-inst">Universidad de La Habana</div>
       <div class="edu-year">2005 – 2007</div>
     </div>
     <div class="edu-card reveal">
-      <div class="edu-degree">Licenciada en Química</div>
+      <div class="edu-degree" data-en="BSc in Chemistry" data-es="Licenciada en Química">Licenciada en Química</div>
       <div class="edu-inst">Universidad de La Habana</div>
       <div class="edu-year">2000 – 2005</div>
     </div>
     <div class="edu-card reveal">
-      <div class="edu-degree">Bootcamp IA &amp; ML (~1,250 h) · En curso</div>
+      <div class="edu-degree" data-en="AI &amp; ML Bootcamp (~1,250 h) · In progress" data-es="Bootcamp IA &amp; ML (~1,250 h) · En curso">Bootcamp IA &amp; ML (~1,250 h) · En curso</div>
       <div class="edu-inst">SomosF5 / AI4Inclusion</div>
       <div class="edu-year">2026 – Present</div>
     </div>
     <div class="edu-card reveal">
-      <div class="edu-degree">Formación continua en línea</div>
+      <div class="edu-degree" data-en="Continuing Education Online" data-es="Formación continua en línea">Formación continua en línea</div>
       <div class="edu-inst">Kaggle · Coursera · edX · DataCamp · CS50P Harvard</div>
       <div class="edu-year">2022 – 2025</div>
     </div>
@@ -673,23 +723,23 @@
 <!-- LANGUAGES -->
 <div id="languages">
   <div class="inner">
-    <span class="label reveal">08 — Languages</span>
+    <span class="label reveal" data-en="08 — Languages" data-es="08 — Idiomas">08 — Languages</span>
     <div class="langs-grid reveal">
       <div class="lang-card">
         <span class="lang-flag">🇪🇸</span>
-        <div><div class="lang-name">Español</div><div class="lang-level">Nativo</div></div>
+        <div><div class="lang-name">Español</div><div class="lang-level" data-en="Native" data-es="Nativo">Nativo</div></div>
       </div>
       <div class="lang-card">
         <span class="lang-flag">🇬🇧</span>
-        <div><div class="lang-name">English</div><div class="lang-level">C1 · Professional</div></div>
+        <div><div class="lang-name">English</div><div class="lang-level" data-en="C1 · Professional" data-es="C1 · Profesional">C1 · Professional</div></div>
       </div>
       <div class="lang-card">
         <span class="lang-flag">🇧🇷</span>
-        <div><div class="lang-name">Português</div><div class="lang-level">Advanced</div></div>
+        <div><div class="lang-name">Português</div><div class="lang-level" data-en="Advanced" data-es="Avanzado">Advanced</div></div>
       </div>
       <div class="lang-card">
         <span class="lang-flag">🇫🇷</span>
-        <div><div class="lang-name">Français</div><div class="lang-level">Intermediate</div></div>
+        <div><div class="lang-name">Français</div><div class="lang-level" data-en="Intermediate" data-es="Intermedio">Intermediate</div></div>
       </div>
     </div>
   </div>
@@ -699,11 +749,11 @@
 
 <!-- CONTACT -->
 <section id="contact">
-  <span class="label reveal">09 — Contact</span>
+  <span class="label reveal" data-en="09 — Contact" data-es="09 — Contacto">09 — Contact</span>
   <div class="contact-grid">
     <div class="reveal">
-      <h2 class="contact-h">Let's build<br>something <em>real.</em></h2>
-      <p class="contact-sub">Open to ML/AI engineering roles in materials science, clean energy, and scientific computing. Available in Madrid, Spain — remote friendly.</p>
+      <h2 class="contact-h" data-en-html="Let's build&lt;br&gt;something &lt;em&gt;real.&lt;/em&gt;" data-es-html="Construyamos&lt;br&gt;algo &lt;em&gt;real.&lt;/em&gt;">Let's build<br>something <em>real.</em></h2>
+      <p class="contact-sub" data-en="Open to ML/AI engineering roles in materials science, clean energy, and scientific computing. Available in Madrid, Spain — remote friendly." data-es="Abierta a puestos de ingeniería ML/IA en ciencia de materiales, energía limpia y computación científica. Disponible en Madrid, España — también en remoto.">Open to ML/AI engineering roles in materials science, clean energy, and scientific computing. Available in Madrid, Spain — remote friendly.</p>
       <svg class="contact-mol" viewBox="0 0 200 125" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <polygon points="100,18 136,38 136,78 100,98 64,78 64,38" fill="none" stroke="#c8602a" stroke-width="1.6" opacity=".65"/>
         <polygon points="100,30 124,44 124,72 100,86 76,72 76,44" fill="none" stroke="#1a1916" stroke-width=".9" stroke-dasharray="5 3" opacity=".3"/>
@@ -718,7 +768,7 @@
         <text x="100" y="116" font-family="monospace" font-size="8" fill="#9a9790" text-anchor="middle" letter-spacing="1.5">MOLECULAR GRAPH</text>
       </svg>
       <div style="margin-top:1.4rem;">
-        <a href="https://raw.githubusercontent.com/yohperez/page/main/cv_es.pdf" class="btn btn-p" download>Download CV ↓</a>
+        <a href="https://raw.githubusercontent.com/yohperez/page/main/cv_es.pdf" class="btn btn-p" download data-en="Download CV ↓" data-es="Descargar CV ↓">Download CV ↓</a>
       </div>
     </div>
     <div class="clinks reveal">
@@ -759,7 +809,7 @@
         <svg class="ci" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path d="M10 1.667A5.833 5.833 0 004.167 7.5c0 4.375 5.833 10.833 5.833 10.833s5.833-6.458 5.833-10.833A5.833 5.833 0 0010 1.667zm0 7.916a2.083 2.083 0 110-4.166 2.083 2.083 0 010 4.166z" fill="#c8602a"/>
         </svg>
-        <span><div class="cl">Location</div><div class="cv-val">Madrid, España</div></span>
+        <span><div class="cl" data-en="Location" data-es="Ubicación">Location</div><div class="cv-val">Madrid, España</div></span>
         <span class="carr">→</span>
       </div>
     </div>
@@ -768,7 +818,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <span class="fc">© 2025 Yohanna Seminóvski Pérez — Scientist × ML Engineer</span>
+  <span class="fc" data-en="© 2025 Yohanna Seminóvski Pérez — Scientist × ML Engineer" data-es="© 2025 Yohanna Seminóvski Pérez — Científica × Ingeniera ML">© 2025 Yohanna Seminóvski Pérez — Scientist × ML Engineer</span>
   <span class="fc" style="display:flex;align-items:center;gap:.4rem;">
     <svg width="10" height="10" viewBox="0 0 20 20"><path d="M10 1.667A5.833 5.833 0 004.167 7.5c0 4.375 5.833 10.833 5.833 10.833s5.833-6.458 5.833-10.833A5.833 5.833 0 0010 1.667zm0 7.916a2.083 2.083 0 110-4.166 2.083 2.083 0 010 4.166z" fill="#9a9790"/></svg>
     Madrid, España
@@ -785,6 +835,61 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  /* ---------- THEME TOGGLE ---------- */
+  const themeBtn = document.getElementById('themeToggle');
+  const iconMoon = document.getElementById('themeIconMoon');
+  const iconSun = document.getElementById('themeIconSun');
+
+  function currentTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  }
+  function applyThemeIcons(theme) {
+    if (theme === 'dark') {
+      iconMoon.style.display = 'none';
+      iconSun.style.display = 'block';
+    } else {
+      iconMoon.style.display = 'block';
+      iconSun.style.display = 'none';
+    }
+  }
+  function setTheme(theme) {
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+    localStorage.setItem('theme', theme);
+    applyThemeIcons(theme);
+  }
+  applyThemeIcons(currentTheme());
+  themeBtn.addEventListener('click', () => {
+    setTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ---------- LANGUAGE TOGGLE ---------- */
+  const langBtn = document.getElementById('langToggle');
+
+  function applyLang(lang) {
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('[data-en], [data-es]').forEach(el => {
+      const txt = lang === 'es' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+      if (txt !== null) el.textContent = txt;
+    });
+    document.querySelectorAll('[data-en-html], [data-es-html]').forEach(el => {
+      const html = lang === 'es' ? el.getAttribute('data-es-html') : el.getAttribute('data-en-html');
+      if (html !== null) el.innerHTML = html;
+    });
+    langBtn.textContent = lang === 'es' ? 'EN' : 'ES';
+    localStorage.setItem('lang', lang);
+  }
+
+  const savedLang = localStorage.getItem('lang') || 'en';
+  applyLang(savedLang);
+
+  langBtn.addEventListener('click', () => {
+    applyLang(document.documentElement.getAttribute('lang') === 'es' ? 'en' : 'es');
+  });
 </script>
 </body>
 </html>
