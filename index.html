@@ -59,6 +59,15 @@
     .scroll-line { width: 40px; height: 1px; background: var(--ink-3); position: relative; overflow: hidden; }
     .scroll-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--warm); animation: scanline 2s 1.5s infinite; }
 
+    /* PITCH */
+    .pitch-grid { display: grid; grid-template-columns: 1fr .8fr; gap: 4rem; margin-top: 2.5rem; align-items: center; }
+    .pitch-h { font-family: var(--serif); font-size: clamp(1.6rem, 3.4vw, 2.2rem); line-height: 1.2; color: var(--ink); }
+    .pitch-h em { font-style: italic; color: var(--warm); }
+    .pitch-sub { margin-top: 1rem; font-size: .95rem; font-weight: 300; color: var(--ink-2); line-height: 1.8; max-width: 420px; }
+    .pitch-video-wrap { justify-self: center; width: 100%; max-width: 300px; }
+    .pitch-video { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; background: var(--ink); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(26,25,22,.12); }
+    @media (max-width: 720px) { .pitch-grid { grid-template-columns: 1fr; gap: 2rem; } .pitch-video-wrap { justify-self: start; max-width: 260px; } }
+
     /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 2.5rem; align-items: start; }
     .about-bio { font-size: 1.02rem; font-weight: 300; color: var(--ink-2); line-height: 1.8; }
@@ -188,6 +197,7 @@
     <span class="nav-brand-text">yohanna.seminovski</span>
   </a>
   <ul class="nav-links">
+    <li><a href="#pitch">Pitch</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -234,9 +244,28 @@
 
 <hr class="divider"/>
 
+<!-- ELEVATOR PITCH -->
+<section id="pitch">
+  <span class="label reveal">01 — Elevator Pitch</span>
+  <div class="pitch-grid">
+    <div class="pitch-copy reveal">
+      <h2 class="pitch-h">30 seconds, <em>one</em> trajectory.</h2>
+      <p class="pitch-sub">A quick self-introduction: 15 years bridging quantum simulation and photovoltaic research, now channelled into machine learning and AI engineering.</p>
+    </div>
+    <div class="pitch-video-wrap reveal">
+      <video class="pitch-video" controls preload="metadata" poster="videos/elevator-pitch-poster.jpg" playsinline>
+        <source src="videos/elevator-pitch.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video. <a href="videos/elevator-pitch.mp4">Descarga el video aquí</a>.
+      </video>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
 <!-- ABOUT -->
 <section id="about">
-  <span class="label reveal">01 — About</span>
+  <span class="label reveal">02 — About</span>
   <div class="about-grid">
     <div class="about-bio reveal">
       <p>I hold a <strong>PhD in Computational Chemistry (UPM, 2014)</strong> with over 15 years of international research experience in quantum simulation, heterogeneous catalysis, and photovoltaic solar energy. Author of <strong>17 scientific publications</strong> in RSC, ACS, AIP, and Elsevier journals, and co-inventor of a registered patent at UPM.</p>
@@ -299,7 +328,7 @@
 <!-- EXPERIENCE -->
 <div id="experience">
   <div class="inner">
-    <span class="label reveal">02 — Professional Experience</span>
+    <span class="label reveal">03 — Professional Experience</span>
     <div class="exp-cols">
       <div class="exp-timeline">
         <div class="exp-item reveal">
@@ -363,7 +392,7 @@
 <div id="skills">
   <div class="inner">
     <div class="skills-head">
-      <span class="label reveal">03 — Skills &amp; Stack</span>
+      <span class="label reveal">04 — Skills &amp; Stack</span>
       <svg class="skills-wave reveal" viewBox="0 0 160 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <polyline points="0,31 10,10 20,52 30,14 40,46 50,19 60,42 70,11 80,49 90,21 100,39 110,8 120,53 130,27 140,36 150,17 160,31"
           fill="none" stroke="#c8602a" stroke-width="2" stroke-linejoin="round" opacity=".75"/>
@@ -487,7 +516,7 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="proj-head">
-    <span class="label reveal">04 — Projects</span>
+    <span class="label reveal">05 — Projects</span>
     <svg class="proj-deco reveal" viewBox="0 0 115 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <line x1="18" y1="31" x2="45" y2="14" stroke="#9a9790" stroke-width="1"/>
       <line x1="18" y1="31" x2="45" y2="48" stroke="#9a9790" stroke-width="1"/>
@@ -566,7 +595,7 @@
 <!-- PUBLICATIONS -->
 <div id="publications">
   <div class="inner">
-    <span class="label reveal">05 — Publications &amp; Patents</span>
+    <span class="label reveal">06 — Publications &amp; Patents</span>
     <div class="pub-stats reveal">
       <div>
         <span class="pub-stat-num">17</span>
@@ -604,7 +633,7 @@
 
 <!-- EDUCATION -->
 <section id="education">
-  <span class="label reveal">06 — Education</span>
+  <span class="label reveal">07 — Education</span>
   <div class="edu-grid">
     <div class="edu-card reveal">
       <div class="edu-degree">Postdoc en Modelado de Catálisis Heterogénea</div>
@@ -644,7 +673,7 @@
 <!-- LANGUAGES -->
 <div id="languages">
   <div class="inner">
-    <span class="label reveal">07 — Languages</span>
+    <span class="label reveal">08 — Languages</span>
     <div class="langs-grid reveal">
       <div class="lang-card">
         <span class="lang-flag">🇪🇸</span>
@@ -670,7 +699,7 @@
 
 <!-- CONTACT -->
 <section id="contact">
-  <span class="label reveal">08 — Contact</span>
+  <span class="label reveal">09 — Contact</span>
   <div class="contact-grid">
     <div class="reveal">
       <h2 class="contact-h">Let's build<br>something <em>real.</em></h2>
